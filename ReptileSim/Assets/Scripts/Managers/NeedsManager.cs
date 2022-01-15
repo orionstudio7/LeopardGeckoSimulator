@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class NeedsManager: MonoBehaviour
 {
-
-    public static float gameHourTimer;
+    public float gameHourTimer;
     public float hourLength;
+    
+    public static NeedsManager instance;
+
      
     
     // Start is called before the first frame update
     void Start()
     {
-        
+         if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     // Update is called once per frame

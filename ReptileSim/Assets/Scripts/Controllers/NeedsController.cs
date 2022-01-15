@@ -14,21 +14,33 @@ public class NeedsController : MonoBehaviour
     
     public DateTime lastTimeFed, lastTimeHappy, lastTimeGainedEnergy;
     
+    private void Awake()
+    {
+        Initialize(100, 100, 100, 5, 2, 1);
+    }
     
     
     // Start is called before the first frame update
-    void Start()
+    public void Initialize(int food, int happiness, int energy,
+        int foodTickRate, int happinessTickRate, int energyTickRate)
     {
+    
+        lastTimeFed = DateTime.Now;
+        lastTimeHappy = DateTime.Now;
+        lastTimeGainedEnergy = DateTime.Now;
         this.food = food;
         this.happiness = happiness;
         this.energy = energy;
+        this.foodTickRate = foodTickRate;
+        this.happinessTickRate = happinessTickRate;
+        this.energyTickRate = energyTickRate;
     }
 
     // Update is called once per frame
     void Update()
     {
     
-        if(NeedsManager.gameHourTimer < 0)
+        if(NeedsManager.instance.gameHourTimer < 0)
         {
             ChangeFood(-foodTickRate);
             ChangeHappy(-happinessTickRate);
@@ -44,6 +56,12 @@ public class NeedsController : MonoBehaviour
     {
         food += amount;
         
+        if(amount>0)
+        {
+            lastTimeFed = DateTime.Now;
+        }
+        
+        
         if (food<0){
             PetManager.instance.Sick();
         }
@@ -53,6 +71,11 @@ public class NeedsController : MonoBehaviour
     public void ChangeHappy(int amount)
     {
         happiness += amount;
+        
+        if(amount>0)
+        {
+            lastTimeHappy = DateTime.Now;
+        }
         
         
         if (happiness<0){
@@ -64,6 +87,11 @@ public class NeedsController : MonoBehaviour
     public void ChangeEnergy(int amount)
     {
         energy += amount;
+        
+        if(amount>0)
+        {
+            lastTimeGainedEnergy = DateTime.Now;
+        }
         
         
         if (energy<0){

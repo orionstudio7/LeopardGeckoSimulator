@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Pet : MonoBehaviour
+[Serializable]
+public class Pet
 {
-    public DateTime lastTimeFed, 
+    public string lastTimeFed, 
                 lastTimeHappy, 
                 lastTimeGainedEnergy;
                 
     public int food, happiness, energy;    
     
     
-    public Pet(DateTime lastTimeFed, DateTime lastTimeHappy, 
-                DateTime lastTImeGainedEnergy, int food, int happiness, int energy)
+    public Pet(string lastTimeFed, string lastTimeHappy, 
+                string lastTImeGainedEnergy, int food, int happiness, int energy)
     {
     
         this.lastTimeFed = lastTimeFed;
